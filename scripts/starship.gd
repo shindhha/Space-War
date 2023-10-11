@@ -1,6 +1,8 @@
 extends Area2D
+@onready var node_life_bar = get_node("/root/World/life_bar/Polygon2D")
+@onready var node_level_bar = get_node("/root/World/level_bar/Polygon2D")
 var life = 3
-var type = "player"
+var level = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -19,17 +21,23 @@ func _input(event):
 func deal_damage():
 	return 0
 	
-func get_damage(damage):
-	life -= damage
-	if (life == 0):
-		hide()
-		queue_free()
+
 
 func _on_area_entered(area):
-	life -= area.deal_damage()
-	if (life == 0):
-		hide()
-		queue_free()
+	var damage = area.deal_damage()
+	if (life - damage >= 0 and life - damage <= 3  ):
+		life -= damage
+		
+	if (level < 9):
+		level += area.give_xp()
+	area._destroy()
+	node_life_bar.set_offset(Vector2(life * 61 - 183,0))
+	node_level_bar.set_offset(Vector2(level * 35.3 -400,0))
+		
+	if (life <= 0):
+		_destroy()
 
-func get_type():
-	return type
+func _destroy():
+	hide()
+	queue_free()
+

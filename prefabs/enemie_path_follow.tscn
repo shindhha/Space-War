@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://5r7leap4dsdc"]
+
+[ext_resource type="Script" path="res://scripts/enemy_move.gd" id="1_cb2j8"]
+[ext_resource type="PackedScene" uid="uid://bvfasbysnfcn5" path="res://prefabs/space_crab.tscn" id="2_k0h38"]
+
+[node name="PathFollow2D" type="PathFollow2D"]
+position = Vector2(1368, 642)
+rotation = -0.707561
+rotates = false
+script = ExtResource("1_cb2j8")
+
+[node name="spaceCrab" parent="." instance=ExtResource("2_k0h38")]
+position = Vector2(0, 0)
+rotation = 2.27836
+
+[node name="_Timer_138399" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3nc0yerffeu4"]
+
+[ext_resource type="Texture2D" uid="uid://ba2laoprgcuk5" path="res://SpaceWarChallengeAssets/assets/images/interface_life_bg.png" id="1_hnhk5"]
+[ext_resource type="Texture2D" uid="uid://ds6exkas47qtg" path="res://SpaceWarChallengeAssets/assets/images/interface_life.png" id="2_eyb5t"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 50.0
+texture_under = ExtResource("1_hnhk5")
+texture_progress = ExtResource("2_eyb5t")
