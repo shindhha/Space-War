@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3rmtc2lxbypo"]
+
+[ext_resource type="Texture2D" uid="uid://ob1kmlyrmg1l" path="res://SpaceWarChallengeAssets/assets/images/item_shield.png" id="1_bqs7k"]
+[ext_resource type="Script" path="res://prefabs/item_shield.gd" id="1_brc50"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nb2rc"]
+
+[node name="Area2D" type="Area2D"]
+position = Vector2(467, 576)
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+script = ExtResource("1_brc50")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(6, 6)
+shape = SubResource("CircleShape2D_nb2rc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bqs7k")

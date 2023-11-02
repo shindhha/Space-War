@@ -5,12 +5,12 @@
 [ext_resource type="Script" path="res://scripts/starship.gd" id="3_28ppe"]
 [ext_resource type="Texture2D" uid="uid://bmvi3i55vmfv7" path="res://SpaceWarChallengeAssets/assets/images/starship.png" id="4_o6spk"]
 [ext_resource type="Script" path="res://scripts/player_guns.gd" id="5_eiim0"]
+[ext_resource type="Texture2D" uid="uid://balpb0c16mrv1" path="res://SpaceWarChallengeAssets/assets/images/shield.png" id="6_n38ml"]
 [ext_resource type="Script" path="res://scripts/load_enemies_on_path.gd" id="6_w0dnf"]
 [ext_resource type="Texture2D" uid="uid://ba2laoprgcuk5" path="res://SpaceWarChallengeAssets/assets/images/interface_life_bg.png" id="7_ipxgp"]
 [ext_resource type="Texture2D" uid="uid://ds6exkas47qtg" path="res://SpaceWarChallengeAssets/assets/images/interface_life.png" id="8_jqpmh"]
 [ext_resource type="Texture2D" uid="uid://bjn85gkamc2th" path="res://SpaceWarChallengeAssets/assets/images/interface_level_bg.png" id="9_p8gba"]
 [ext_resource type="Texture2D" uid="uid://bb7ydjrgg0wxc" path="res://SpaceWarChallengeAssets/assets/images/interface_level.png" id="10_da7jm"]
-[ext_resource type="PackedScene" uid="uid://5ubkyml6pgwx" path="res://prefabs/item_life.tscn" id="11_6ks5a"]
 
 [sub_resource type="Animation" id="Animation_ytbxo"]
 length = 0.001
@@ -40,9 +40,9 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_8oi54"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1368, 642, 0, 0, 0, 0, 1373, 604, 0, 0, 0, 0, 1414, 507, 0, 0, 0, 0, 1478, 412, 0, 0, 0, 0, 1645, 383, 0, 0, 0, 0, 1790, 388, 0, 0, 0, 0, 1916, 431, 0, 0, 0, 0, 1944, 521, 0, 0, 0, 0, 1937, 623, 0, 0, 0, 0, 1927, 723, 0, 0, 0, 0, 1913, 818, 0, 0, 0, 0, 1813, 863, 0, 0, 0, 0, 1649, 866, 0, 0, 0, 0, 1520, 838, 0, 0, 0, 0, 1417, 729, 0, 0, 0, 0, 1368, 644, 0, 0, 0, 0, 1368, 642)
+"points": PackedVector2Array(135.57, -306.815, -135.57, 306.815, 2059.11, 1019.06, -1074.08, -196.307, 1074.08, 196.307, 1302, 81, 0, 0, 0, 0, 2060, 1016, 0, 0, 0, 0, 2058, 1018)
 }
-point_count = 17
+point_count = 4
 
 [node name="World" type="Node2D"]
 
@@ -65,6 +65,7 @@ libraries = {
 
 [node name="starship" type="Area2D" parent="."]
 position = Vector2(467, 576)
+scale = Vector2(0.5, 0.5)
 collision_mask = 2
 script = ExtResource("3_28ppe")
 
@@ -78,12 +79,25 @@ texture = ExtResource("4_o6spk")
 [node name="gunright" type="Node2D" parent="starship"]
 position = Vector2(30, 85)
 script = ExtResource("5_eiim0")
+y = -200
 
 [node name="gunleft" type="Node2D" parent="starship"]
 position = Vector2(26, -85)
 script = ExtResource("5_eiim0")
+y = 200
+
+[node name="guncenter" type="Node2D" parent="starship"]
+position = Vector2(107, 1)
+script = ExtResource("5_eiim0")
+fire = true
+
+[node name="shield" type="Sprite2D" parent="starship"]
+visible = false
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_n38ml")
 
 [node name="Path2D" type="Path2D" parent="."]
+position = Vector2(461, 67)
 curve = SubResource("Curve2D_8oi54")
 script = ExtResource("6_w0dnf")
 enemie_number = 10
@@ -99,16 +113,14 @@ texture = ExtResource("8_jqpmh")
 polygon = PackedVector2Array(202, 36, 219, 48, 224, 65, 217, 83, 204, 94, 54, 94, 37, 78, 37, 48, 55, 34)
 
 [node name="level_bar" type="Sprite2D" parent="."]
+position = Vector2(1, -1)
 texture = ExtResource("9_p8gba")
 centered = false
 
 [node name="Polygon2D" type="Polygon2D" parent="level_bar"]
 z_index = 4096
-offset = Vector2(-512, 0)
+offset = Vector2(-388, 0)
 texture = ExtResource("10_da7jm")
-polygon = PackedVector2Array(458, 40, 472, 52, 475, 63, 471, 78, 460, 88, 85, 89, 86, 39)
-
-[node name="ItemLife" parent="." instance=ExtResource("11_6ks5a")]
-position = Vector2(1038, 519)
+polygon = PackedVector2Array(463, 32, 479, 46, 485, 65, 478, 84, 459, 96, 84, 96, 84, 32)
 
 [connection signal="area_entered" from="starship" to="starship" method="_on_area_entered"]

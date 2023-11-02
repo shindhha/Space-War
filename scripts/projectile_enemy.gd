@@ -16,8 +16,11 @@ func _destroy():
 	hide()
 	queue_free()
 
-func deal_damage():
-	return damage
 
-func give_xp():
-	return 0
+
+func update_spaceship(spaceship):
+	if not spaceship.is_protected():
+		spaceship.decrease_life(damage)
+	else:
+		spaceship.disable_shield()
+	
